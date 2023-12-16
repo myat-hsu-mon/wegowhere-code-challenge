@@ -4,7 +4,7 @@ import { PaymentCardProps } from "../interfaces/paymentCard";
 import request from "../config/request";
 
 interface createChargeProps {
-  card: PaymentCardProps;
+  cardId: string;
   amount: string;
   currency: string;
 }

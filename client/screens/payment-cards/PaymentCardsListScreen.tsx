@@ -28,7 +28,7 @@ const PaymentCardsListScreen: React.FC = () => {
 
   const handlePayment = async (card: PaymentCardProps) => {
     const amount = getRandomAmount().toString();
-    createCharge({ card, amount, currency: "thb" });
+    createCharge({ cardId: card._id as string, amount, currency: "thb" });
   };
 
   const renderPaymentCards = () => {

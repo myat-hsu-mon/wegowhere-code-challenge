@@ -30,7 +30,6 @@ const useSignIn = ({ navigation }: SignInProps): useSignInResult => {
       setLoading(false);
     }
   };
-  console.log({ token: user?.token });
   return { signIn, user, loading, error };
 };
 
