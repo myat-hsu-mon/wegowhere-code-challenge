@@ -15,8 +15,11 @@ import useCreateCharge from "../../hooks/useCreateCharge";
 import usePaymentCards from "../../hooks/usePaymentCards";
 import getRandomAmount from "../../helpers/getRandomAmount";
 import ErrorText from "../../components/common/ErrorText";
+import { Link } from "@react-navigation/native";
+import colors from "../../theme/color.json";
+import Button from "../../components/common/Button";
 
-const PaymentCardsListScreen: React.FC = () => {
+const PaymentCardsListScreen: React.FC = ({ navigation }: any) => {
   const { paymentCards, loading, error } = usePaymentCards();
   const {
     modalVisible,
@@ -58,7 +61,16 @@ const PaymentCardsListScreen: React.FC = () => {
 
   if (loading || chargeLoading) return <LoadingSpinner />;
   if (error) return <ErrorText error={error} />;
-  if (chargeError) return <ErrorText error={chargeError} />;
+  if (chargeError)
+    return (
+      <View style={styles.errorContainer}>
+        <ErrorText error={chargeError} />
+        <Button
+          title="Go To Cards"
+          onPress={() => navigation.replace("PaymentCardsList")}
+        />
+      </View>
+    );
   if (modalVisible)
     return (
       <Modal
@@ -77,6 +89,15 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: "center",
+  },
+  errorContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  linkText: {
+    color: colors.primary,
+    fontSize: 16,
   },
   title: {
     fontSize: 20,
